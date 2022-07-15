@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cellular Automaton</title>
+</head>
+<body>
+<canvas id="panel" width="600" height="800" style="background: beige"></canvas>
+<button class="go-btn" onclick="reset()">Reset</button>
+</body>
+<script type="text/javascript" src="js/cellar_automaton.js"></script>
+<script>
+    const cellarController = new CellarController(document.getElementById('panel'))
+    cellarController.newCellar(30,14)
+    cellarController.newCellar(30,15)
+    cellarController.newCellar(30,16)
+    cellarController.newCellar(30,17)
+    cellarController.newCellar(30,18)
+    cellarController.start()
+    function reset() {
+        cellarController.reset()
+    }
+</script>
+<style>
+  .go-btn {
+      position: fixed;
+      right: 5px;
+      bottom: 5px;
+  }
+</style>
+</html>
