@@ -1,0 +1,4 @@
+[submodule "js/mvvc"]
+	path = js/mvvc
+	url = https://github.com/DevSum/mvvc-demo.git
+	branch = master
