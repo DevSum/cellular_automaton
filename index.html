@@ -5,12 +5,32 @@
   <title>Cellular Automaton</title>
 </head>
 <body>
-<canvas id="panel" width="600" height="800" style="background: beige"></canvas>
-<button class="go-btn" onclick="reset()">Reset</button>
+<div id="app">
+  <canvas id="panel" width="600" height="800" style="background: beige"></canvas>
+  <div class="control-panel">
+    {{ refreshInterval }}
+    <label>
+      <input  inq-on:oninput="setRefreshInterval" inq-model="refreshInterval" />ms
+    </label>
+    <button class="go-btn" onclick="reset()">Reset</button>
+  </div>
+</div>
 </body>
 <script type="text/javascript" src="js/cellar_automaton.js"></script>
+<script type="text/javascript" src="js/mvvc/my-mvvm.js"></script>
 <script>
     const cellarController = new CellarController(document.getElementById('panel'))
+    const model = new MyMVVM({
+        el: '#app',
+        data: {
+            refreshInterval: 1000
+        },
+        methods: {
+            setRefreshInterval: (e) => {
+                cellarController.setFrequency(e.target.value)
+            }
+        }
+    })
     cellarController.newCellar(30,14)
     cellarController.newCellar(30,15)
     cellarController.newCellar(30,16)
@@ -22,7 +42,9 @@
     }
 </script>
 <style>
-  .go-btn {
+  .control-panel {
+      display: flex;
+      flex-direction: column;
       position: fixed;
       right: 5px;
       bottom: 5px;

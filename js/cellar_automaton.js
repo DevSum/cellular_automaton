@@ -22,6 +22,7 @@ class CellarController {
             {le: 8, state: LifeState.dead},
         ],
     }
+    refreshTimer = null
 
     constructor(cavansElement) {
         this.canvas = cavansElement
@@ -63,10 +64,7 @@ class CellarController {
     }
 
     start() {
-        setInterval(() => {
-            this.nextGeneration()
-            this.refresh()
-        }, 1000)
+        this.setFrequency(1000)
     }
 
     getPositionFromClick(x, y) {
@@ -138,5 +136,16 @@ class CellarController {
     reset() {
         this.cellarBag = new Set()
         this.refresh()
+    }
+
+    setFrequency(interval) {
+        console.log(interval)
+        if (this.refreshTimer) {
+            clearInterval(this.refreshTimer)
+        }
+        this.refreshTimer = setInterval(() => {
+            this.nextGeneration()
+            this.refresh()
+        }, interval)
     }
 }
